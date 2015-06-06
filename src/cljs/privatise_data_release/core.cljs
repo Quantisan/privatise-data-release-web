@@ -1,25 +1,11 @@
 (ns privatise-data-release.core
-    (:require [reagent.core :as reagent :refer [atom]]
+    (:require [privatise-data-release.view :as v]
+              [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
               [secretary.core :as secretary :include-macros true]
               [goog.events :as events]
               [goog.history.EventType :as EventType])
     (:import goog.History))
-
-;; -------------------------
-;; Views
-
-(defn home-page []
-  [:div
-   [:h2 "Privatized Data Release"]
-   [:h3 "a proof of concept demonstration"]
-   [:div
-    [:p "Input data CSV (binary values only):"]
-    [:textarea {:id :input-data
-                :rows 10 :cols 80}]
-    [:p
-     [:input {:type :submit
-              :value "Privatize"}]]]])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
@@ -28,7 +14,7 @@
 ;; Routes
 
 (secretary/defroute "/" []
-  (session/put! :current-page #'home-page))
+  (session/put! :current-page #'v/home-page))
 
 ;; -------------------------
 ;; History

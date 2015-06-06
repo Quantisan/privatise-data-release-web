@@ -25,6 +25,8 @@
             [lein-environ "1.0.0"]
             [lein-asset-minifier "0.2.2"]]
 
+  :aliases {"develop" ["do" ["clean"] ["figwheel"]]}
+
   :ring {:handler privatise-data-release.handler/app
          :uberwar-name "privatise-data-release.war"}
 
@@ -79,9 +81,7 @@
 
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
                                               :compiler {:main "privatise-data-release.dev"
-                                                         :source-map true}}
-}
-}}
+                                                         :source-map true}}}}}
 
              :uberjar {:hooks [leiningen.cljsbuild minify-assets.plugin/hooks]
                        :env {:production true}
