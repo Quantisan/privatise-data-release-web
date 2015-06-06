@@ -3,8 +3,11 @@
             [compojure.route :refer [not-found resources]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [hiccup.page :refer [html5 include-js include-css]]
+            [hiccup.element :refer [javascript-tag]]
             [prone.middleware :refer [wrap-exceptions]]
             [environ.core :refer [env]]))
+
+(def project-version (-> "project.clj" slurp read-string (nth 2)))
 
 (def home-page
   (html5
@@ -20,6 +23,8 @@
      (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
     [:body
      [:div#app]
+     (javascript-tag (str "var projectVersion = '" project-version "';"))
+     (include-js "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js")
      (include-js "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
      (include-js "js/app.js")]]))
 
