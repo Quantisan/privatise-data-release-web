@@ -1,5 +1,7 @@
 (ns privatise-data-release.view
-  (:require [clojure.string :as s]
+  (:require [reagent.core :as reagent :refer [atom]]
+            [reagent-forms.core :refer [bind-fields]]
+            [clojure.string :as s]
             [goog.string :as gstring]))
 
 (defn base
@@ -34,23 +36,35 @@
                       (map #(s/join "," %))
                       (s/join "\n" )))
 
-(defn home-page []
-  (base
-    [:div.jumbotron
-     [:form.form-horizontal
-      [:div.form-group
-       [:label.col-sm-3.control-label {:for :input-data} "Paste your data"]
-       [:div.col-sm-9
-        [:textarea {:id :input-data
-                    :rows 10 :cols 55
-                    :value example-csv}]
-        [:span.help-block {:id :helpBlock} "Paste in your data in CSV format. Values can only be binary, 0 or 1."]]]
+(defn form-group [[label-text label-id] input help-text]
+  [:div.form-group
+   [:label.col-sm-3.control-label {:for label-id} label-text]
+   [:div.col-sm-9
+    input
+    [:span.help-block {:id :helpBlock} help-text]]])
 
-      [:div.form-group
-       [:div.col-sm-offset-3.col-sm-9
-        [:button.btn.btn-primary {:type :submit} "Privatize"]
-        " "
-        [:button.btn.btn-default {:type :button} "Reset"]]]]]))
+(def input-form
+  (form-group ["Paste your data" :input-data]
+              [:textarea.form-control {:field :textarea
+                                       :id :input-data
+                                       :rows 10}]
+              "Paste in your data in CSV format. Values can only be binary, 0 or 1."))
+
+(defn home-page []
+  (let [form-data (atom {:input-data example-csv})]
+    (fn []
+      (base
+        [:div.jumbotron {:key "jumbotron"}
+         [:div.form-horizontal
+          [bind-fields input-form form-data]
+          [:div.form-group
+           [:div.col-sm-offset-3.col-sm-9
+            [:button.btn.btn-primary {:type :submit} "Privatize"]
+            " "
+            [:button.btn.btn-default
+             {:type :button
+              :on-click #(reset! form-data {:input-data example-csv})}
+             "Reset"]]]]]))))
 
 (defn result []
   (base
