@@ -1,5 +1,5 @@
 (ns privatise-data-release.view
-  (:require [reagent.core :as reagent :refer [atom]]
+  (:require [reagent.core :as r :refer [atom]]
             [reagent-forms.core :refer [bind-fields]]
             [clojure.string :as s]
             [goog.string :as gstring]))
@@ -50,24 +50,47 @@
                                        :rows 10}]
               "Paste in your data in CSV format. Values can only be binary, 0 or 1."))
 
-(defn home-page []
-  (let [form-data (atom {:input-data example-csv})]
-    (fn []
-      (base
-        [:div.jumbotron {:key "jumbotron"}
-         [:div.form-horizontal
-          [bind-fields input-form form-data]
-          [:div.form-group
-           [:div.col-sm-offset-3.col-sm-9
-            [:button.btn.btn-primary {:type :submit} "Privatize"]
-            " "
-            [:button.btn.btn-default
-             {:type :button
-              :on-click #(reset! form-data {:input-data example-csv})}
-             "Reset"]]]]]))))
+(defn input-block [form-data ra-loading?]
+  [:div.jumbotron {:key "jumbotron"}
+          [:div.form-horizontal
+           [bind-fields input-form form-data]
+           [:div.form-group
+            [:div.col-sm-offset-3.col-sm-9
+             [:button.btn.btn-primary {:type :submit
+                                       :on-click #(reset! ra-loading? true)} "Privatize"]
+             " "
+             [:button.btn.btn-default
+              {:type :button
+               :on-click #(do
+                            (reset! form-data {:input-data example-csv})
+                            (reset! ra-loading? false))}
+              "Reset"]]]]])
+
+(defn loading-block [ra-loading?]
+  (r/create-class
+    {:reagent-render
+     (fn [ra-loading?]
+       (when @ra-loading?
+         [:div.loading.vertical-center
+          [:img {:src "img/loading.gif"
+                 :width "100px"}]]))
+
+     ;; Scroll component into view when displayed
+     :component-did-update
+     ;; TODO refactor, should be a way to put DOM into view when shown without using logic
+     (fn [this] (when @ra-loading? (.scrollIntoView (r/dom-node this))))}))
 
 (defn result []
-  (base
-    [:div.alert.alert-danger "This is an unsecure, proof of concept demonstration. Use at your own risk."]
+  [:div.alert.alert-danger "This is an unsecure, proof of concept demonstration. Use at your own risk."]
+  )
 
-    ))
+(defn home-page []
+  (let [form-data (atom {:input-data example-csv})
+        ra-loading? (atom false)]
+    (fn []
+      (base
+        [:div.row
+         [input-block form-data ra-loading?]]
+        [:div.row
+         [loading-block ra-loading?]]))))
+
