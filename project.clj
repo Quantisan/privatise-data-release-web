@@ -10,6 +10,7 @@
 
                  [org.clojure/clojure "1.7.0-RC1"]
 
+                 [http-kit "2.1.18"]
                  [ring-server "0.4.0"]
                  [ring "1.3.2"]
                  [ring/ring-defaults "0.1.4"]
