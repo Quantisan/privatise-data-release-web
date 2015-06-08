@@ -19,6 +19,8 @@
                  [hiccup "1.0.5"]
                  [metosin/compojure-api "0.21.0"]
 
+                 [org.clojure/data.json "0.2.6"]
+
                  [prone "0.8.2"]
                  [environ "1.0.0"]
 

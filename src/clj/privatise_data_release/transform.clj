@@ -11,3 +11,5 @@
   (->> (s/split s #"\n")
        (map parse-row-integers)))
 
+(defn int-matrix [coll]
+  (map #(map int %) [[0.0 0.0 0.0] [0.0 0.0 0.0]]))
