@@ -6,20 +6,32 @@
 
   :source-paths ["src/clj" "src/cljs"]
 
-  :dependencies [[org.clojure/clojure "1.7.0-RC1"]
+  :dependencies [;; Server-side
+
+                 [org.clojure/clojure "1.7.0-RC1"]
+
                  [ring-server "0.4.0"]
+                 [ring "1.3.2"]
+                 [ring/ring-defaults "0.1.4"]
+
+                 [compojure "1.3.3"]
+                 [hiccup "1.0.5"]
+                 [metosin/compojure-api "0.21.0"]
+
+                 [prone "0.8.2"]
+                 [environ "1.0.0"]
+
+                 ;; Client-side
+
+                 [org.clojure/clojurescript "0.0-3291" :scope "provided"]
                  [cljsjs/react "0.13.1-0"]
                  [reagent "0.5.0"]
                  [reagent-forms "0.5.1"]
                  [reagent-utils "0.1.4"]
-                 [ring "1.3.2"]
-                 [ring/ring-defaults "0.1.4"]
-                 [prone "0.8.2"]
-                 [compojure "1.3.3"]
-                 [hiccup "1.0.5"]
-                 [environ "1.0.0"]
-                 [org.clojure/clojurescript "0.0-3291" :scope "provided"]
-                 [secretary "1.2.3"]]
+                 [secretary "1.2.3"]
+
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
+                 [cljs-http "0.1.34"]]
 
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
@@ -30,7 +42,7 @@
   :ring {:handler privatise-data-release.handler/app
          :uberwar-name "privatise-data-release.war"}
 
-  :min-lein-version "2.5.0"
+  :min-lein-version "2.5.1"
 
   :uberjar-name "privatise-data-release.jar"
 
@@ -41,7 +53,7 @@
 
   :minify-assets
   {:assets
-    {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
+   {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
                              :compiler {:output-to     "resources/public/js/app.js"
@@ -89,7 +101,7 @@
                        :omit-source true
                        :cljsbuild {:jar true
                                    :builds {:app
-                                             {:source-paths ["env/prod/cljs"]
-                                              :compiler
-                                              {:optimizations :advanced
-                                               :pretty-print false}}}}}})
+                                            {:source-paths ["env/prod/cljs"]
+                                             :compiler
+                                             {:optimizations :advanced
+                                              :pretty-print false}}}}}})

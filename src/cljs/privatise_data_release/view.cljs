@@ -1,5 +1,6 @@
 (ns privatise-data-release.view
-  (:require [reagent.core :as r :refer [atom]]
+  (:require [privatise-data-release.gateway :as g]
+            [reagent.core :as r :refer [atom]]
             [reagent-forms.core :refer [bind-fields]]
             [clojure.string :as s]
             [goog.string :as gstring]))
@@ -43,6 +44,7 @@
     input
     [:span.help-block {:id :helpBlock} help-text]]])
 
+
 (def input-form
   (form-group ["Paste your data" :input-data]
               [:textarea.form-control {:field :textarea
@@ -50,21 +52,25 @@
                                        :rows 10}]
               "Paste in your data in CSV format. Values can only be binary, 0 or 1."))
 
-(defn input-block [form-data ra-loading?]
+
+(defn input-block [form-data ra-status ra-loading?]
   [:div.jumbotron {:key "jumbotron"}
-          [:div.form-horizontal
-           [bind-fields input-form form-data]
-           [:div.form-group
-            [:div.col-sm-offset-3.col-sm-9
-             [:button.btn.btn-primary {:type :submit
-                                       :on-click #(reset! ra-loading? true)} "Privatize"]
-             " "
-             [:button.btn.btn-default
-              {:type :button
-               :on-click #(do
-                            (reset! form-data {:input-data example-csv})
-                            (reset! ra-loading? false))}
-              "Reset"]]]]])
+   [:div.form-horizontal
+    [bind-fields input-form form-data]
+    [:div.form-group
+     [:div.col-sm-offset-3.col-sm-9
+      [:button.btn.btn-primary
+       {:type :submit
+        :on-click #(do (reset! ra-loading? true)
+                       (g/post-data form-data ra-status ra-loading?))}
+       "Privatize"]
+      " "
+      [:button.btn.btn-default
+       {:type :button
+        :on-click #(do
+                     (reset! form-data {:input-data example-csv})
+                     (reset! ra-loading? false))}
+       "Reset"]]]]])
 
 (defn loading-block [ra-loading?]
   (r/create-class
@@ -86,11 +92,17 @@
 
 (defn home-page []
   (let [form-data (atom {:input-data example-csv})
-        ra-loading? (atom false)]
+        ra-loading? (atom false)
+        ra-status (atom nil)]
     (fn []
       (base
         [:div.row
-         [input-block form-data ra-loading?]]
+         [input-block form-data ra-status ra-loading?]]
         [:div.row
+         (when (g/error? @ra-status)
+           [:div.alert.alert-danger
+            "Oh no! Looks like there's an error! Please "
+            [:a {:href "mailto:paul@quantisan.com"} "contact support"]
+            ". Status code: " @ra-status])
          [loading-block ra-loading?]]))))
 
