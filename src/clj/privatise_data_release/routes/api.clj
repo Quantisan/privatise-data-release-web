@@ -9,18 +9,22 @@
   {:csv-data s/Str})
 
 (defapi api-routes
-  (swagger-ui "/api/swagger-ui")
+  ;{:formats [:json-kw]}
+
+  (swagger-ui "/api/reference")
   (swagger-docs
     {:info {:title "Data release API"}})
 
   (context* "/api" []
 
             (POST* "/data-release" []
-                   :return   (s/maybe CsvData)
-                   :body     [csv (s/maybe CsvData)]
+                   :return   CsvData
+                   :body     [csv CsvData]
                    :summary  "Reads in a CSV string and return the MWEM representation"
-                   (ok (-> csv
-                           t/parse-csv
-                           g/mwem
-                           t/int-matrix)))))
+                   (ok {:csv-data (-> csv
+                                      :csv-data
+                                      t/parse-csv
+                                      g/mwem
+                                      t/int-matrix
+                                      str)}))))
 

@@ -9,8 +9,8 @@
 
 (defn post-data [form-data ra-status ra-loading?]
   (go (let [{:keys [status error-code error-text]}
-            (<! (http/post "/"
-                           {:json-params {:input-data @form-data}}))]
+            (<! (http/post "/api/data-release"
+                           {:json-params {:csv-data (:input-data @form-data)}}))]
         (reset! ra-status status)
         (reset! ra-loading? false))))
 

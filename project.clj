@@ -20,7 +20,7 @@
                  [metosin/compojure-api "0.21.0"]
 
                  [org.clojure/data.json "0.2.6"]
-
+                 [com.taoensso/timbre "3.4.0"]
                  [prone "0.8.2"]
                  [environ "1.0.0"]
 
@@ -70,7 +70,7 @@
   :profiles {:dev {:repl-options {:init-ns privatise-data-release.repl
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
-                   :dependencies [[ring-mock "0.1.5"]
+                   :dependencies [[ring/ring-mock "0.2.0"]
                                   [ring/ring-devel "1.3.2"]
                                   [weasel "0.6.0"]
                                   [leiningen-core "2.5.1"]

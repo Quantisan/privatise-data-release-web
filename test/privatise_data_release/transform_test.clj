@@ -3,5 +3,5 @@
             [clojure.test :refer :all]))
 
 (deftest parse-csv-test
-  (is (= [[1 2] [3 4]] (parse-csv "1,2\n3,4\n"))))
+  (is (= [[1 0 0] [0 0 1]] (parse-csv "1,0,0\n0,0,1\n"))))
 
