@@ -32,5 +32,5 @@
      (include-js "js/app.js")]]))
 
 (defroutes home-routes
-  (GET "/" [] home-page))
+  (GET "/data-release-demo" [] home-page))
 

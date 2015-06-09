@@ -1,9 +1,12 @@
 (ns privatise-data-release.gateway
   (:require [org.httpkit.client :as http]
             [clojure.data.json :as json]
-            [taoensso.timbre :as log]))
+            [taoensso.timbre :as log]
+            [environ.core :refer [env]]))
 
-(def endpoints {:mwem "http://localdocker:9000"})
+(def endpoints (if (env :dev)
+                 {:mwem "http://localdocker:9000"}
+                 {:mwem "http://q-service.cloudapp.net:9000"}))
 
 (defn mwem [coll]
   (let [options {:body (json/write-str coll)}
