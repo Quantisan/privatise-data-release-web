@@ -8,7 +8,7 @@
             [prone.middleware :refer [wrap-exceptions]]))
 
 (defn wrap-dev [handler]
-  (if (env :dev)
+  (if (env :dev?)
     (-> handler
         wrap-exceptions)
     handler))

@@ -20,7 +20,7 @@
      [:meta {:name :author :content "Paul Lam"}]
 
      (include-css "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
-     (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
+     (include-css (if (env :dev?) "css/site.css" "css/site.min.css"))]
 
     [:body
 

@@ -92,7 +92,7 @@
                               :css-dirs ["resources/public/css"]
                               :ring-handler privatise-data-release.handler/app}
 
-                   :env {:dev true}
+                   :env {:dev? true}
 
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
                                               :compiler {:main "privatise-data-release.dev"
