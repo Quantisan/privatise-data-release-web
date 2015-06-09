@@ -83,18 +83,10 @@
   [bind-fields output-form form-data])
 
 (defn loading-block [ra-loading?]
-  (r/create-class
-    {:reagent-render
-     (fn [ra-loading?]
-       (when @ra-loading?
-         [:div.loading.vertical-center
-          [:img {:src "img/loading.gif"
-                 :width "100px"}]]))
-
-     ;; Scroll component into view when displayed
-     :component-did-update
-     ;; TODO refactor, should be a way to put DOM into view when shown without using logic
-     (fn [this] (when @ra-loading? (.scrollIntoView (r/dom-node this))))}))
+  (when @ra-loading?
+    [:div.loading.vertical-center
+     [:img {:src "img/loading.gif"
+            :width "100px"}]]))
 
 (defn home-page []
   (let [form-data (atom {:input-data example-csv})
@@ -103,7 +95,9 @@
     (fn []
       (base
         [:div.row
-         [input-block form-data ra-status ra-loading?]]
+         (when (:output-data @form-data)
+           [:div.alert.alert-danger "This is an unsecure, proof of concept demonstration. Use at your own risk."]
+           [output-block form-data])]
         [:div.row
          (when (g/error? @ra-status)
            [:div.alert.alert-danger
@@ -112,7 +106,5 @@
             ". Status code: " @ra-status])
          [loading-block ra-loading?]]
         [:div.row
-         (when (:output-data @form-data)
-           [:div.alert.alert-danger "This is an unsecure, proof of concept demonstration. Use at your own risk."]
-           [output-block form-data])]))))
+         [input-block form-data ra-status ra-loading?]]))))
 
