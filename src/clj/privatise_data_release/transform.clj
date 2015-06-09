@@ -14,3 +14,7 @@
 (defn int-matrix [coll]
   (seq (map #(map int %) coll)))
 
+(defn write-csv [coll]
+  (->> coll
+       (map #(s/join "," %))
+       (s/join "\n")))

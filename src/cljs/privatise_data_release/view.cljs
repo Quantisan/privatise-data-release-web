@@ -24,16 +24,15 @@
      [:a {:href "https://www.quantisan.com"} "Paul Lam"] " 2015"]]])
 
 (def example-csv (->> [[1 0 0 1 1] [1 0 0 1 0] [1 1 1 0 0] [1 0 1 1 1] [1 1 0 0 1] [1 0 1 1 1] [0 0 0 0 1] [0 0 1 0 1] [1 1 1 1 0] [1 0 0 0 0]
-                       ;[0 1 1 1 1] [1 0 0 0 0] [1 1 0 0 1] [0 1 0 1 0] [1 0 0 0 0] [1 0 1 1 1] [1 1 0 1 1] [0 1 1 0 1] [1 1 1 0 1] [1 0 0 1 0]
-                       ;[0 0 1 1 1] [0 1 1 1 0] [0 1 1 0 1] [0 1 1 1 1] [1 1 0 1 0] [0 1 1 0 1] [0 1 0 0 1] [1 1 0 1 0] [1 0 0 1 1] [1 0 0 0 0]
-                       ;[1 0 1 1 1] [0 0 0 0 1] [1 1 1 1 0] [0 1 1 1 1] [1 0 1 1 1] [0 0 0 0 1] [0 1 0 0 1] [1 0 0 1 0] [1 0 0 0 1] [1 1 0 0 1]
-                       ;[0 0 1 1 1] [1 1 1 0 0] [1 1 1 1 0] [0 0 0 1 1] [0 0 0 0 0] [0 1 1 0 0] [0 0 1 1 0] [1 0 1 0 1] [1 0 0 1 0] [0 0 0 0 0]
-                       ;[1 0 0 0 0] [1 1 1 1 1] [1 0 0 1 1] [0 1 1 0 0] [1 1 1 1 0] [1 1 0 0 0] [1 1 1 0 1] [1 0 1 1 0] [0 0 1 1 0] [0 1 1 0 0]
-                       ;[0 0 1 1 0] [1 1 0 0 1] [0 1 1 1 0] [1 0 1 0 0] [0 0 0 0 0] [1 0 1 1 1] [0 0 0 0 1] [1 1 0 0 0] [1 0 0 0 0] [1 0 1 1 0]
-                       ;[1 1 1 1 1] [1 1 0 1 1] [1 0 0 0 0] [0 1 1 1 0] [0 0 1 1 1] [1 0 1 1 1] [1 1 0 0 1] [0 1 0 1 0] [1 0 0 0 1] [0 0 1 1 0]
-                       ;[1 1 1 1 0] [0 0 0 1 1] [1 0 1 1 1] [0 1 0 0 1] [1 1 1 1 0] [0 1 1 0 1] [1 0 1 0 1] [0 0 1 1 1] [1 0 1 0 0] [1 0 1 0 0]
-                       ;[0 0 0 1 0] [0 1 0 0 0] [1 1 1 1 1] [0 0 1 1 0] [0 0 1 0 1] [0 0 0 1 0] [0 0 0 0 0] [1 1 0 1 1] [1 0 0 1 1] [0 0 1 1 1]
-                       ]
+                       [0 1 1 1 1] [1 0 0 0 0] [1 1 0 0 1] [0 1 0 1 0] [1 0 0 0 0] [1 0 1 1 1] [1 1 0 1 1] [0 1 1 0 1] [1 1 1 0 1] [1 0 0 1 0]
+                       [0 0 1 1 1] [0 1 1 1 0] [0 1 1 0 1] [0 1 1 1 1] [1 1 0 1 0] [0 1 1 0 1] [0 1 0 0 1] [1 1 0 1 0] [1 0 0 1 1] [1 0 0 0 0]
+                       [1 0 1 1 1] [0 0 0 0 1] [1 1 1 1 0] [0 1 1 1 1] [1 0 1 1 1] [0 0 0 0 1] [0 1 0 0 1] [1 0 0 1 0] [1 0 0 0 1] [1 1 0 0 1]
+                       [0 0 1 1 1] [1 1 1 0 0] [1 1 1 1 0] [0 0 0 1 1] [0 0 0 0 0] [0 1 1 0 0] [0 0 1 1 0] [1 0 1 0 1] [1 0 0 1 0] [0 0 0 0 0]
+                       [1 0 0 0 0] [1 1 1 1 1] [1 0 0 1 1] [0 1 1 0 0] [1 1 1 1 0] [1 1 0 0 0] [1 1 1 0 1] [1 0 1 1 0] [0 0 1 1 0] [0 1 1 0 0]
+                       [0 0 1 1 0] [1 1 0 0 1] [0 1 1 1 0] [1 0 1 0 0] [0 0 0 0 0] [1 0 1 1 1] [0 0 0 0 1] [1 1 0 0 0] [1 0 0 0 0] [1 0 1 1 0]
+                       [1 1 1 1 1] [1 1 0 1 1] [1 0 0 0 0] [0 1 1 1 0] [0 0 1 1 1] [1 0 1 1 1] [1 1 0 0 1] [0 1 0 1 0] [1 0 0 0 1] [0 0 1 1 0]
+                       [1 1 1 1 0] [0 0 0 1 1] [1 0 1 1 1] [0 1 0 0 1] [1 1 1 1 0] [0 1 1 0 1] [1 0 1 0 1] [0 0 1 1 1] [1 0 1 0 0] [1 0 1 0 0]
+                       [0 0 0 1 0] [0 1 0 0 0] [1 1 1 1 1] [0 0 1 1 0] [0 0 1 0 1] [0 0 0 1 0] [0 0 0 0 0] [1 1 0 1 1] [1 0 0 1 1] [0 0 1 1 1]]
                       (map #(s/join "," %))
                       (s/join "\n" )))
 
@@ -62,7 +61,7 @@
       [:button.btn.btn-primary
        {:type :submit
         :on-click #(do (reset! ra-loading? true)
-                       (g/post-data form-data ra-status ra-loading?))}
+                       (g/post-data! form-data ra-status ra-loading?))}
        "Privatize"]
       " "
       [:button.btn.btn-default
@@ -71,6 +70,17 @@
                      (reset! form-data {:input-data example-csv})
                      (reset! ra-loading? false))}
        "Reset"]]]]])
+
+(def output-form
+  (form-group ["Privatized data" :output-data]
+              [:textarea.form-control {:field :textarea
+                                       :id :output-data
+                                       :readonly true
+                                       :rows 10}]
+              ""))
+
+(defn output-block [form-data]
+  [bind-fields output-form form-data])
 
 (defn loading-block [ra-loading?]
   (r/create-class
@@ -86,10 +96,6 @@
      ;; TODO refactor, should be a way to put DOM into view when shown without using logic
      (fn [this] (when @ra-loading? (.scrollIntoView (r/dom-node this))))}))
 
-(defn result []
-  [:div.alert.alert-danger "This is an unsecure, proof of concept demonstration. Use at your own risk."]
-  )
-
 (defn home-page []
   (let [form-data (atom {:input-data example-csv})
         ra-loading? (atom false)
@@ -104,5 +110,9 @@
             "Oh no! Looks like there's an error! Please "
             [:a {:href "mailto:paul@quantisan.com"} "contact support"]
             ". Status code: " @ra-status])
-         [loading-block ra-loading?]]))))
+         [loading-block ra-loading?]]
+        [:div.row
+         (when (:output-data @form-data)
+           [:div.alert.alert-danger "This is an unsecure, proof of concept demonstration. Use at your own risk."]
+           [output-block form-data])]))))
 

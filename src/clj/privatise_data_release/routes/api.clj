@@ -26,5 +26,5 @@
                                       t/parse-csv
                                       g/mwem
                                       t/int-matrix
-                                      str)}))))
+                                      t/write-csv)}))))
 

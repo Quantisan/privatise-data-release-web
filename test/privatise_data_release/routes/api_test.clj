@@ -14,5 +14,5 @@
                                (mock/content-type "application/json")))]
       (is (= 200 (:status resp)))
       (let [data (:csv-data (parse-body (:body resp)))]
-        (is (= 17 (count data))))))) ;; data is a string
+        (is (= 11 (count data))))))) ;; data is a string
 
