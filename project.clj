@@ -1,4 +1,4 @@
-(defproject privatise-data-release "0.1.0-SNAPSHOT"
+(defproject privatise-data-release "0.1.0"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
