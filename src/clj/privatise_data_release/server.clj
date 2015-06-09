@@ -8,6 +8,8 @@
 (defn -main [& args]
   (let [port (Integer/parseInt (or (env :port) "3000"))]
     (run-server
-      (if (env :dev?) (reload/wrap-reload #'app) app)
+      (if (env :dev?)
+        (reload/wrap-reload #'app {:dirs ["src/clj"]})
+        app)
       {:port port :join? false})))
 
