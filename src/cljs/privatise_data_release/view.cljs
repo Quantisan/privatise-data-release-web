@@ -53,7 +53,7 @@
 
 
 (defn input-block [form-data ra-status ra-loading?]
-  [:div.jumbotron {:key "jumbotron"}
+  [:div.jumbotron.accent {:key "jumbotron"}
    [:div.form-horizontal
     [bind-fields input-form form-data]
     [:div.form-group
@@ -80,7 +80,9 @@
               ""))
 
 (defn output-block [form-data]
-  [bind-fields output-form form-data])
+  [:div.jumbotron
+   [:div.alert.alert-danger "This is an unsecure, proof of concept demonstration. Use at your own risk."]
+   [bind-fields output-form form-data]])
 
 (defn loading-block [ra-loading?]
   (when @ra-loading?
@@ -96,7 +98,6 @@
       (base
         [:div.row
          (when (:output-data @form-data)
-           [:div.alert.alert-danger "This is an unsecure, proof of concept demonstration. Use at your own risk."]
            [output-block form-data])]
         [:div.row
          (when (g/error? @ra-status)

@@ -6,6 +6,7 @@
 
 (def endpoints (if (env :dev)
                  {:mwem "http://localdocker:9000"}
+                 ;; TODO put this in env var
                  {:mwem "http://q-service.cloudapp.net:9000"}))
 
 (defn mwem [coll]
