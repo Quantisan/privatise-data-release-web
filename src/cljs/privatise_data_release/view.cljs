@@ -77,11 +77,11 @@
                                        :id :output-data
                                        :readonly true
                                        :rows 10}]
-              "What are you seeing here is a differentially private synthetic data of your input data set. [1]"))
+              "What are you seeing here is a differentially private synthetic data of your input data set [1]. Basically this dataset acts and behave just like your original data but it is mathetically guaranteed to not expose any individual's identification."))
 
 (defn output-block [form-data]
   [:div.jumbotron
-   [:div.alert.alert-danger "This is an unsecure, proof of concept demonstration. Use at your own risk."]
+   [:div.alert.alert-warning "This is an unsecure, proof of concept demonstration. Use at your own risk."]
    [bind-fields output-form form-data]
    [:div
     [:small "[1] Hardt, Ligett, and McSherry, " [:a {:href  "http://arxiv.org/abs/1012.4763"} "A simple and practical algorithm for differentially private data release"]
