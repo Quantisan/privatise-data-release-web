@@ -1,6 +1,6 @@
 (ns privatise-data-release.routes.home
   (:require [hiccup.page :refer [html5 include-js include-css]]
-            [hiccup.element :refer [javascript-tag link-to mail-to]]
+            [hiccup.element :refer [javascript-tag]]
 
             [ring.util.response :refer [redirect]]
             [compojure.core :refer [defroutes GET]]
